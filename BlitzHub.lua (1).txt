@@ -1,4 +1,4 @@
--- By Melik
+-- Blitz Hub On Top
 
 if getgenv().BlitzHubLoaded and getgenv().BlitzHubWindow then
     pcall(function()
@@ -79,9 +79,7 @@ if hasFS and hasLoadstring then
 end
 if ranFromCache then return end
 
--- ─── GLOBAL CONFIG ──────────────────────────────────────────
 getgenv().BlitzHubConfig = getgenv().BlitzHubConfig or {
-    -- Magnet
     MagnetEnabled     = false,
     CatchRadius       = 8.0,
     AutoCatch         = false,
@@ -90,7 +88,6 @@ getgenv().BlitzHubConfig = getgenv().BlitzHubConfig or {
     AngleLock         = false,
     MagnetHotkey      = "E",
 
-    -- QB Aimbot
     QBAPassing        = false,
     MagLead           = 5.0,
     AngleLead         = 3.0,
@@ -103,7 +100,6 @@ getgenv().BlitzHubConfig = getgenv().BlitzHubConfig or {
     PerfectAccuracy   = false,
     LookAtTarget      = false,
 
-    -- Defense
     AutoSwat          = false,
     AutoTackle        = false,
     DiveAssist        = false,
@@ -113,14 +109,12 @@ getgenv().BlitzHubConfig = getgenv().BlitzHubConfig or {
     FumbleStripper    = false,
     AutoStrafe        = false,
 
-    -- Kicker
     AutoPower         = false,
     KickPowerTarget   = 90.0,
     AutoAim           = false,
     TrajectoryPreview = false,
     KickMeterFreeze   = false,
 
-    -- Player
     SpeedEnabled      = false,
     Speed             = 22.0,
     JumpEnabled       = false,
@@ -129,7 +123,6 @@ getgenv().BlitzHubConfig = getgenv().BlitzHubConfig or {
     AngleValue        = 55.0,
     HipHeight         = 2.0,
 
-    -- Visuals
     FOV               = 70,
     TracerLines       = false,
     ChamsEnabled      = false,
@@ -138,12 +131,10 @@ getgenv().BlitzHubConfig = getgenv().BlitzHubConfig or {
     LandingZone       = 5.0,
     NoClip            = false,
 
-    -- Misc
     AntiFumble        = false,
     AutoGG            = false,
     FakeLag           = 0.0,
 
-    -- Settings
     StreamerMode      = false,
     Notifications     = true,
     FPSUnlock         = false,
@@ -154,7 +145,6 @@ getgenv().BlitzHubConfig = getgenv().BlitzHubConfig or {
 
 local cfg = getgenv().BlitzHubConfig
 
--- ─── SERVICE REFERENCES ─────────────────────────────────────
 local Players          = game:GetService("Players")
 local RunService       = game:GetService("RunService")
 local UserInputService = game:GetService("UserInputService")
@@ -173,7 +163,6 @@ local function getGuiParent()
     return game:GetService("CoreGui")
 end
 
--- ─── FORWARD DECLARATIONS ───────────────────────────────────
 local espBillboard, espLabel
 local chamBoxes = {}
 local savedCollisions = {}
@@ -181,9 +170,6 @@ local magnetConn, qbaConn, strafeConn, noClipConn
 local clearChams, restoreCollisions, ensureESP
 local startMagnet, startQBA, startStrafe, startNoClip
 
--- ════════════════════════════════════════════════════════════
---  THEME
--- ════════════════════════════════════════════════════════════
 local Theme = {
     Black       = Color3.fromRGB(8, 9, 12),
     Surface     = Color3.fromRGB(16, 17, 22),
@@ -218,9 +204,6 @@ local TabIcons = {
     Settings = "ST",
 }
 
--- ════════════════════════════════════════════════════════════
---  UTILITIES
--- ════════════════════════════════════════════════════════════
 local function tween(obj, props, duration, style, direction)
     local tw = TweenService:Create(obj, TweenInfo.new(
         duration or 0.18,
@@ -318,9 +301,6 @@ local function addShadow(parent, cornerRadius)
     return holder
 end
 
--- ════════════════════════════════════════════════════════════
---  NOTIFICATION SYSTEM
--- ════════════════════════════════════════════════════════════
 local NotifyGui = Instance.new("ScreenGui")
 NotifyGui.Name = "BlitzHubNotifications"
 NotifyGui.ResetOnSpawn = false
@@ -406,9 +386,6 @@ local function pushNotification(title, content, duration)
     end)
 end
 
--- ════════════════════════════════════════════════════════════
---  UI FRAMEWORK  (BlitzUI)
--- ════════════════════════════════════════════════════════════
 local BlitzUI = {}
 local WindowMeta = {}
 WindowMeta.__index = WindowMeta
@@ -448,7 +425,6 @@ local function makeCard(page, height, order)
     return row
 end
 
--- ─── TAB METHODS ─────────────────────────────────────────────
 function TabMeta:_nextOrder()
     self._order = self._order + 1
     return self._order
@@ -973,7 +949,6 @@ function TabMeta:CreateInput(opts)
     return comp
 end
 
--- ─── WINDOW METHODS ──────────────────────────────────────────
 function WindowMeta:CreateTab(name)
     local index = #self.Tabs + 1
 
@@ -1206,7 +1181,6 @@ function BlitzUI.CreateWindow(opts)
     sheenGradient.Parent = sheen
     sheen.Parent = main
 
-    -- ── HEADER ──
     local header = Instance.new("Frame")
     header.Name = "Header"
     header.BackgroundTransparency = 1
@@ -1304,7 +1278,6 @@ function BlitzUI.CreateWindow(opts)
     })
     sepGradient.Parent = separator
 
-    -- ── BODY: SIDEBAR + CONTENT ──
     local body = Instance.new("Frame")
     body.Name = "Body"
     body.BackgroundTransparency = 1
@@ -1380,14 +1353,12 @@ function BlitzUI.CreateWindow(opts)
     return window
 end
 
--- ─── HELPER: NORMALIZE KEYBIND ──────────────────────────────
 local function normalizeKey(v)
     if type(v) == "string" then return v end
     if typeof(v) == "EnumItem" then return v.Name end
     return tostring(v)
 end
 
--- ─── WINDOW ─────────────────────────────────────────────────
 local Window = BlitzUI.CreateWindow({
     Subtitle = "Football Fusion 3",
     Version  = "v1.0.0",
@@ -1396,7 +1367,6 @@ local Window = BlitzUI.CreateWindow({
 getgenv().BlitzHubWindow = Window
 getgenv().BlitzHubLoaded = true
 
--- ─── HELPER: NOTIFY ─────────────────────────────────────────
 local function Notify(title, content, dur)
     if not cfg.Notifications then return end
     pcall(function()
@@ -1445,7 +1415,6 @@ task.spawn(function()
     end
 end)
 
--- ─── HELPER: FIND BALL ──────────────────────────────────────
 local function findBall()
     for _, obj in ipairs(Workspace:GetDescendants()) do
         if obj:IsA("BasePart") and
@@ -1455,9 +1424,6 @@ local function findBall()
     end
 end
 
--- ────────────────────────────────────────────────────────────
---  TAB: MAGNET
--- ────────────────────────────────────────────────────────────
 local MagnetTab = Window:CreateTab("Magnet")
 
 MagnetTab:CreateToggle({
@@ -1531,9 +1497,6 @@ MagnetTab:CreateKeybind({
     end,
 })
 
--- ────────────────────────────────────────────────────────────
---  TAB: QB AIMBOT
--- ────────────────────────────────────────────────────────────
 local QBATab = Window:CreateTab("QB Aimbot")
 
 QBATab:CreateToggle({
@@ -1641,9 +1604,6 @@ QBATab:CreateSlider({
     Callback     = function(v) cfg.DimeHeight = v end,
 })
 
--- ────────────────────────────────────────────────────────────
---  TAB: DEFENSE
--- ────────────────────────────────────────────────────────────
 local DefenseTab = Window:CreateTab("Defense")
 
 DefenseTab:CreateToggle({
@@ -1727,9 +1687,6 @@ DefenseTab:CreateToggle({
     end,
 })
 
--- ────────────────────────────────────────────────────────────
---  TAB: KICKER
--- ────────────────────────────────────────────────────────────
 local KickerTab = Window:CreateTab("Kicker")
 
 KickerTab:CreateToggle({
@@ -1792,9 +1749,6 @@ KickerTab:CreateButton({
     end,
 })
 
--- ────────────────────────────────────────────────────────────
---  TAB: PLAYER
--- ────────────────────────────────────────────────────────────
 local PlayerTab = Window:CreateTab("Player")
 
 PlayerTab:CreateToggle({
@@ -1903,9 +1857,6 @@ PlayerTab:CreateSlider({
     end,
 })
 
--- ────────────────────────────────────────────────────────────
---  TAB: VISUALS
--- ────────────────────────────────────────────────────────────
 local VisualsTab = Window:CreateTab("Visuals")
 
 VisualsTab:CreateSlider({
@@ -2000,9 +1951,6 @@ VisualsTab:CreateToggle({
     end,
 })
 
--- ────────────────────────────────────────────────────────────
---  TAB: MISC
--- ────────────────────────────────────────────────────────────
 local MiscTab = Window:CreateTab("Misc")
 
 MiscTab:CreateToggle({
@@ -2062,9 +2010,6 @@ MiscTab:CreateSlider({
     Callback     = function(v) cfg.FakeLag = v end,
 })
 
--- ────────────────────────────────────────────────────────────
---  TAB: SETTINGS
--- ────────────────────────────────────────────────────────────
 local SettingsTab = Window:CreateTab("Settings")
 
 SettingsTab:CreateInput({
@@ -2203,11 +2148,6 @@ SettingsTab:CreateButton({
     end,
 })
 
--- ════════════════════════════════════════════════════════════
---  RUNTIME SYSTEMS
--- ════════════════════════════════════════════════════════════
-
--- ── Tracer GUI ──
 local tracerGui = Instance.new("ScreenGui")
 tracerGui.Name           = "BlitzHubTracerGui"
 tracerGui.ResetOnSpawn   = false
@@ -2254,7 +2194,6 @@ ensureESP = function()
     espLabel.Parent      = espBillboard
 end
 
--- ── Chams ──
 clearChams = function()
     for _, b in pairs(chamBoxes) do pcall(function() b:Destroy() end) end
     chamBoxes = {}
@@ -2423,7 +2362,6 @@ startStrafe = function()
     end)
 end
 
--- ── Anti-Fumble ──
 if hasHookMeta then
     pcall(function()
         local oldNewIndex
@@ -2532,7 +2470,6 @@ RunService.RenderStepped:Connect(function()
     end
 end)
 
--- ── Fumble Stripper ──
 task.spawn(function()
     while true do
         task.wait(1)
@@ -2545,7 +2482,6 @@ task.spawn(function()
     end
 end)
 
--- ── Auto-Tackle & Auto-Swat / Interception ──────────────────
 RunService.RenderStepped:Connect(function()
     if not (cfg.AutoTackle or cfg.AutoSwat or cfg.AutoInterception) then return end
 
@@ -2574,7 +2510,6 @@ RunService.RenderStepped:Connect(function()
     end
 end)
 
--- ── Kicker: Auto-Power / Freeze ──
 task.spawn(function()
     while true do
         task.wait(0.05)
@@ -2620,7 +2555,6 @@ RunService.RenderStepped:Connect(function()
     end
 end)
 
--- ── Master render loop ──
 local lastRender = 0
 
 RunService.RenderStepped:Connect(function()
@@ -2669,7 +2603,6 @@ RunService.RenderStepped:Connect(function()
     end
 end)
 
--- ── Feature-gate watchers ──
 RunService.RenderStepped:Connect(function()
     if cfg.MagnetEnabled and not magnetConn then startMagnet()  end
     if cfg.QBAPassing    and not qbaConn    then startQBA()     end
@@ -2677,7 +2610,6 @@ RunService.RenderStepped:Connect(function()
     if cfg.NoClip        and not noClipConn then startNoClip()  end
 end)
 
--- ── Menu hotkey toggle ───────────────────────────────────────
 UserInputService.InputBegan:Connect(function(input, processed)
     if processed then return end
     local keyName = input.KeyCode.Name
@@ -2697,5 +2629,4 @@ UserInputService.InputEnded:Connect(function(input, processed)
     end
 end)
 
--- ─── READY ──────────────────────────────────────────────────
 Notify("Blitz Hub | FF3", "Script loaded successfully!", 5)
