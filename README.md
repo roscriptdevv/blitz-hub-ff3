@@ -10,9 +10,9 @@
 
 ---
 
-![Version](https://img.shields.io/badge/Version-v1.0-blue)
-![Game]([https://img.shields.io/badge/Game-Football%20Fusion%203-success](https://www.roblox.com/games/82866880824588/Football-Fusion-3))
-![Status](https://img.shields.io/badge/Status-Active-brightgreen)
+[![Version](https://img.shields.io/badge/Version-v1.0-blue)](https://github.com/roscriptdevv/blitz-hub-ff3)
+[![Game](https://img.shields.io/badge/Game-Football%20Fusion%203-success)](https://www.roblox.com/games/82866880824588/Football-Fusion-3)
+[![Status](https://img.shields.io/badge/Status-Active-brightgreen)](https://github.com/roscriptdevv/blitz-hub-ff3)
 
 </div>
 
@@ -148,11 +148,8 @@ FF3 Hub is an all-in-one Football Fusion 3 hub focused on performance, customiza
 # 📦 Installation
 
 ```lua
-loadstring(game:HttpGet("YOUR_SCRIPT_LINK"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/roscriptdevv/blitz-hub-ff3/refs/heads/main/Main.lua"))()
 ```
-
-Replace `YOUR_SCRIPT_LINK` with your hosted script URL.
-
 ---
 
 # 📁 Repository
