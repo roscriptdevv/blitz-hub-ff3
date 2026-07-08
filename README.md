@@ -157,8 +157,7 @@ loadstring(game:HttpGet("https://raw.githubusercontent.com/roscriptdevv/blitz-hu
 ```text
 FF3Hub
 ├── 📄 FF3Hub.lua
-├── 📄 README.md
-└── 📁 Assets
+└── 📄 README.md
 ```
 
 ---
