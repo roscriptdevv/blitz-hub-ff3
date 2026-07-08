@@ -2,7 +2,7 @@
 
 <div align="center">
 
-### 🏈 Football Fusion 3 Premium Hub
+### 🏈 Football Fusion 3 Script Hub
 
 *A modern, feature-rich hub built for Football Fusion 3.*
 
@@ -148,15 +148,15 @@ FF3 Hub is an all-in-one Football Fusion 3 hub focused on performance, customiza
 # 📦 Installation
 
 ```lua
-loadstring(game:HttpGet("https://raw.githubusercontent.com/roscriptdevv/blitz-hub-ff3/refs/heads/main/Main.lua"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/roscriptdevv/blitz-hub-ff3/refs/heads/main/BlitzHub.lua"))()
 ```
 ---
 
 # 📁 Repository
 
 ```text
-FF3Hub
-├── 📄 FF3Hub.lua
+Blitz Hub
+├── 📄 BlitzHub.lua
 └── 📄 README.md
 ```
 
