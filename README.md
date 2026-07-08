@@ -11,7 +11,7 @@
 ---
 
 ![Version](https://img.shields.io/badge/Version-v1.0-blue)
-![Game](https://img.shields.io/badge/Game-Football%20Fusion%203-success)
+![Game]([https://img.shields.io/badge/Game-Football%20Fusion%203-success](https://www.roblox.com/games/82866880824588/Football-Fusion-3))
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen)
 
 </div>
